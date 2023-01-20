@@ -1,0 +1,28 @@
+name: Run ci
+
+on: [push, pull_request]
+
+jobs:
+  tests:
+    name: Run Tests
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install packages
+        run: npm install
+      - name: format code
+        run: npm run format
+      - name: check and fix code style
+        run: npm run lint
+      - name: test build process
+        run: yarn run build
