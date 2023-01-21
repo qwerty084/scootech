@@ -1,42 +1,27 @@
-name: 'branch deploy demo'
-
-# The workflow to execute on is comments that are newly created
-on: pull_request
-
-# Permissions needed for reacting and adding comments for IssueOps commands
-permissions:
-  pull-requests: write
-  deployments: write
-  contents: write
-  checks: read
-
 jobs:
-  deploy-test:
-    if: ${{ github.event.issue.pull_request }} # only run on pull request comments
+  # Build job
+  build:
+    # <Not provided for brevity>
+    # At a minimum this job should upload artifacts using actions/upload-pages-artifact
+
+  # Deploy job
+  deploy:
+    # Add a dependency to the build job
+    needs: build
+
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to verify the deployment originates from an appropriate source
+
+    # Deploy to the github-pages environment
+    environment: development
+      name:
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    # Specify runner + deployment step
     runs-on: ubuntu-latest
     steps:
-      # Execute IssueOps branch deployment logic, hooray!
-      # This will be used to "gate" all future steps below and conditionally trigger steps/deployments
-      - uses: github/branch-deploy@v4
-        id: branch-deploy
-        with:
-          trigger: '.deploy'
-
-      # Run your deployment logic for your project here - examples seen below
-
-      # Checkout your projects repository based on the ref provided by the branch-deploy step
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ steps.branch-deploy.outputs.ref }}
-
-      # Do some fake "noop" deployment logic here
-      # conditionally run a noop deployment
-      - name: fake noop deploy
-        if: ${{ steps.branch-deploy.outputs.continue == 'true' && steps.branch-deploy.outputs.noop == 'true' }}
-        run: echo "I am doing a fake noop deploy"
-
-      # Do some fake "regular" deployment logic here
-      # conditionally run a regular deployment
-      - name: fake regular deploy
-        if: ${{ steps.branch-deploy.outputs.continue == 'true' && steps.branch-deploy.outputs.noop != 'true' }}
-        run: echo "I am doing a fake regular deploy"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
