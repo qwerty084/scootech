@@ -36,7 +36,7 @@ jobs:
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./dist
-          destination: ./development
+          destination: { { github.head_ref } }
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
 
