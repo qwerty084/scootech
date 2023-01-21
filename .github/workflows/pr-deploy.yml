@@ -1,7 +1,7 @@
 name: 'branch deploy demo'
 
 # The workflow to execute on is comments that are newly created
-on: [pull_request]
+on: pull_request
 
 # Permissions needed for reacting and adding comments for IssueOps commands
 permissions:
