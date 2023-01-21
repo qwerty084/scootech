@@ -2,6 +2,8 @@ name: Deploy pull request
 
 on: pull_request
 
+pull_number=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
+
 permissions:
   contents: read
   pages: write
@@ -36,7 +38,7 @@ jobs:
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./dist
-          destination: ${{ steps.deployment.outputs.page_url }}
+          destination: ./pull_number
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
 
