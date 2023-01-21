@@ -7,6 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "build:pages": "vite build --config github.pages.js",
+    "build:pullrequest": "vite build --config github.pr.js",
     "preview": "vite preview",
     "lint": "eslint . --ext .js --fix --ignore-path .eslintignore",
     "format": "prettier --write ."
