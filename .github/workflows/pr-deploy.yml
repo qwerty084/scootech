@@ -2,8 +2,6 @@ name: Deploy pull request
 
 on: pull_request
 
-  workflow_dispatch:
-
 permissions:
   contents: read
   pages: write
@@ -12,9 +10,7 @@ permissions:
 concurrency:
   group: 'pages'
   cancel-in-progress: true
-environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
