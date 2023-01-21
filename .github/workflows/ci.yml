@@ -20,9 +20,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install packages
         run: npm install
-      - name: format code
-        run: npm run format
       - name: check and fix code style
         run: npm run lint
       - name: test build process
-        run: yarn run build
+        run: npm run build
