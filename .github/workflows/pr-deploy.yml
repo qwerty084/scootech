@@ -11,7 +11,7 @@ permissions:
   checks: read
 
 jobs:
-  demo:
+  deploy-test:
     if: ${{ github.event.issue.pull_request }} # only run on pull request comments
     runs-on: ubuntu-latest
     steps:
