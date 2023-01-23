@@ -1,7 +1,6 @@
 import './assets/style.css';
 import { renderTemplate } from './render';
-import { scooters, bookScooter, returnScooter } from './scooters';
-import { toggleScooterBtn } from './ui';
+import { scooters, bookScooter, returnScooter, returnAll } from './scooters';
 
 renderTemplate(scooters);
 
@@ -9,7 +8,6 @@ renderTemplate(scooters);
 document.querySelectorAll('.book-scooter').forEach((btn) => {
   btn.addEventListener('click', (e) => {
     const scooterId = e.target.getAttribute('data-scooterid');
-    toggleScooterBtn(scooterId);
     bookScooter(scooterId);
   });
 });
@@ -18,7 +16,11 @@ document.querySelectorAll('.book-scooter').forEach((btn) => {
 document.querySelectorAll('.return-scooter').forEach((btn) => {
   btn.addEventListener('click', (e) => {
     const scooterId = e.target.getAttribute('data-scooterid');
-    toggleScooterBtn(scooterId);
     returnScooter(scooterId);
   });
+});
+
+// return all
+document.querySelector('.return-all').addEventListener('click', () => {
+  returnAll();
 });

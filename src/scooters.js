@@ -1,5 +1,8 @@
-import { startTimer } from './timer';
-import { toggleAvailableState } from './ui';
+import { calcSingleSum } from './pricecalc';
+import { resetTimer, startTimer } from './timer';
+import { toggleAvailableState, toggleScooterBtn } from './ui';
+
+let totalSum = 0;
 
 export const scooters = [
   {
@@ -63,6 +66,7 @@ export function bookScooter(scooterId) {
   const interval = startTimer(scooter);
   scooter.interval = interval;
   toggleAvailableState(scooterId);
+  toggleScooterBtn(scooterId);
 }
 
 export function returnScooter(scooterId) {
@@ -70,5 +74,25 @@ export function returnScooter(scooterId) {
   scooter.available = true;
   clearInterval(scooter.interval);
   toggleAvailableState(scooterId);
-  // TODO: calculate and display cost
+  toggleScooterBtn(scooterId);
+  resetTimer(scooterId);
+  totalSum += calcSingleSum(scooter);
+  console.log('returnScooter before format' + totalSum);
+  document.querySelector('.endSum').textContent = new Intl.NumberFormat(
+    'de-DE',
+    {
+      style: 'currency',
+      currency: 'EUR',
+    }
+  ).format(totalSum);
+  console.log(totalSum);
+}
+
+export function returnAll() {
+  const rentedScooters = scooters.filter(
+    (rentedScooters) => rentedScooters.available === false
+  );
+  for (const rentedScooter of rentedScooters) {
+    returnScooter(rentedScooter.id);
+  }
 }
