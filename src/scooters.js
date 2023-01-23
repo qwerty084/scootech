@@ -3,6 +3,7 @@ import { resetTimer, startTimer } from './timer';
 import { toggleAvailableState, toggleScooterBtn } from './ui';
 
 let totalSum = 0;
+let distance = document.getElementById('distance');
 
 export const scooters = [
   {
@@ -70,14 +71,18 @@ export function bookScooter(scooterId) {
 }
 
 export function returnScooter(scooterId) {
+  if (distance.value == '') {
+    alert('Bitte gib die zurückgelegte Stecke an :)');
+    return;
+  }
+
   const scooter = scooters.filter((scooter) => scooter.id == scooterId)[0];
   scooter.available = true;
   clearInterval(scooter.interval);
   toggleAvailableState(scooterId);
   toggleScooterBtn(scooterId);
   resetTimer(scooterId);
-  totalSum += calcSingleSum(scooter);
-  console.log('returnScooter before format' + totalSum);
+  totalSum += calcSingleSum(scooter, distance.value);
   document.querySelector('.endSum').textContent = new Intl.NumberFormat(
     'de-DE',
     {
@@ -85,7 +90,7 @@ export function returnScooter(scooterId) {
       currency: 'EUR',
     }
   ).format(totalSum);
-  console.log(totalSum);
+  scooter.rentingPeriod = 0;
 }
 
 export function returnAll() {

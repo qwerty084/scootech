@@ -1,10 +1,6 @@
-let distance = 1;
-
-export function calcSingleSum(scooter) {
+export function calcSingleSum(scooter, distanceValue) {
   let singleTimeSum = (scooter.rentingPeriod / 60) * scooter.pricePerMin;
-  console.log('calcSingleSum' + singleTimeSum);
-
-  let distanceSum = distance * scooter.pricePerKm;
+  let distanceSum = distanceValue * scooter.pricePerKm;
 
   if (singleTimeSum > distanceSum) {
     return distanceSum;

@@ -13,7 +13,7 @@
     <h1 class="text-center mt-10 text-3xl font-extrabold text-gray-90 md:text-5xl lg:text-6xl">
       <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-violet-400">ScooTeq GmbH</span>
     </h1>
-    <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md mt-20 mb-7">
+    <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md mt-14 mb-7">
       <table class="w-full border-collapse bg-white text-left text-sm text-gray-500">
         <thead class="bg-gray-50">
           <tr>
@@ -42,13 +42,21 @@
       </table>
     </div>
 
-    <div class="button-container flex justify-end">
-      <button class="return-all bg-violet-500 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded-full">
+    <div class="button-container flex justify-between">
+      <div>
+        <label for="distance" class="block pl-1 text-sm font-medium text-gray-700">Gesamtstrecke in km</label>
+        <div class="mt-1">
+          <input type="number" name="distance" id="distance"
+            class="block w-full rounded-md border-gray-300 shadow-md focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            placeholder="Gesamtstrecke">
+        </div>
+      </div>
+      <button class="return-all h-full bg-violet-500 hover:bg-violet-700 text-white font-bold py-2 px-4 rounded-full">
         Alle Scooter zurückgeben
       </button>
     </div>
     <div
-      class="px-6 py-4 overflow-hidden rounded-lg border border-gray-200 shadow-md mt-20 mb-7 flex justify-between font-bold text-lg text-gray-700">
+      class="px-6 py-4 overflow-hidden rounded-lg border border-gray-200 shadow-md mt-10 flex justify-between font-bold text-lg text-gray-700">
       <span>Gesamtpreis</span>
       <span class="endSum">0,00 €</span>
     </div>
