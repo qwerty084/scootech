@@ -61,6 +61,13 @@ export const scooters = [
   },
 ];
 
+// function alertMissingDistance() {
+//   if (distance.value == '') {
+//     alert('Bitte gib die zurückgelegte Stecke an :)');
+//     return;
+//   }
+// }
+
 export function bookScooter(scooterId) {
   const scooter = scooters.filter((scooter) => scooter.id == scooterId)[0];
   scooter.available = false;
@@ -72,10 +79,13 @@ export function bookScooter(scooterId) {
 
 export function returnScooter(scooterId) {
   if (distance.value == '') {
-    alert('Bitte gib die zurückgelegte Stecke an :)');
+    alert('Bitte gib die zurückgelegte Stecke an.');
     return;
   }
-
+  if (distance.value < 0) {
+    alert('Bitte gib eine positive Kilometerzahl an.');
+    return;
+  }
   const scooter = scooters.filter((scooter) => scooter.id == scooterId)[0];
   scooter.available = true;
   clearInterval(scooter.interval);
@@ -94,6 +104,14 @@ export function returnScooter(scooterId) {
 }
 
 export function returnAll() {
+  if (distance.value == '') {
+    alert('Bitte gib die zurückgelegte Stecke an.');
+    return;
+  }
+  if (distance.value < 0) {
+    alert('Bitte gib eine positive Kilometerzahl an.');
+    return;
+  }
   const rentedScooters = scooters.filter(
     (rentedScooters) => rentedScooters.available === false
   );
