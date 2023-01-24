@@ -79,7 +79,11 @@ export function bookScooter(scooterId) {
 
 export function returnScooter(scooterId) {
   if (distance.value == '') {
-    alert('Bitte gib die zurückgelegte Stecke an :)');
+    alert('Bitte gib die zurückgelegte Stecke an.');
+    return;
+  }
+  if (distance.value < 0) {
+    alert('Bitte gib eine positive Kilometerzahl an.');
     return;
   }
   const scooter = scooters.filter((scooter) => scooter.id == scooterId)[0];
@@ -101,7 +105,11 @@ export function returnScooter(scooterId) {
 
 export function returnAll() {
   if (distance.value == '') {
-    alert('Bitte gib die zurückgelegte Stecke an :)');
+    alert('Bitte gib die zurückgelegte Stecke an.');
+    return;
+  }
+  if (distance.value < 0) {
+    alert('Bitte gib eine positive Kilometerzahl an.');
     return;
   }
   const rentedScooters = scooters.filter(
